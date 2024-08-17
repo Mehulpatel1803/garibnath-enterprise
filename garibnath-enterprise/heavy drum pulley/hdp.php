@@ -7,13 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garibnath Stock Management</title>
     <link rel="stylesheet" href="styles.css">
-    </head>
+    <style>
+        .low-quantity {
+            color: red;
+        }
+    </style>
+</head>
 <body>
     <!-- nav container -->
     <nav class="nav-container">
         <!-- left -->
         <img class="logo" src="../image/garibnath.jpg" alt="error"> <!-- Corrected path -->
-
 
         <!-- middle container -->
         <div class="header">
@@ -23,7 +27,7 @@
         <h3 class="download-btn">Stone crusher all parts.</h3>
     </nav>
 
-    <h2 class="product-header centered"style="background-color:black;">PULLEY</h2>
+    <h2 class="product-header centered" style="background-color:black;">HEAVY DRUM PULLEY</h2>
 
     <!-- Search Bar -->
     <input class="search" type="text" id="searchBar" placeholder="Search for products..." onkeyup="filterTable()">
@@ -52,7 +56,7 @@
         </thead>
         <tbody>
             <?php
-            $sql = "SELECT * FROM pulley";
+            $sql = "SELECT * FROM hdp";
             $result = $conn->query($sql);
 
             $total_qty = 0;
@@ -66,7 +70,7 @@
                     $total_qty += $total_qty_product;
                     $total_price += $total_price_product;
 
-                    $qty_class = $total_qty_product < 2 ? 'low-quantity' : '';
+                    $qty_class = $total_qty_product < 10 ? 'low-quantity' : '';
 
                     echo "<tr data-id='{$row['id']}'>
                             <td>{$sr_no}</td>
@@ -90,7 +94,7 @@
         <tfoot>
             <tr>
                 <th colspan="4">Total</th>
-                <th class="<?php echo $total_qty < 2 ? 'low-quantity' : ''; ?>"><?php echo $total_qty; ?></th>
+                <th class="<?php echo $total_qty < 10 ? 'low-quantity' : ''; ?>"><?php echo $total_qty; ?></th>
                 <th></th>
                 <th>₹<?php echo number_format($total_price, 2); ?></th>
                 <th></th>
@@ -108,7 +112,7 @@
                 const totalQtyCell = row.querySelector("td:nth-child(5)");
                 if (totalQtyCell) {
                     const totalQty = parseInt(totalQtyCell.textContent, 10);
-                    totalQtyCell.className = totalQty < 2 ? 'low-quantity' : '';
+                    totalQtyCell.className = totalQty < 10 ? 'low-quantity' : '';
                 }
             });
         }
@@ -212,7 +216,7 @@
             totalPriceCell.textContent = '₹' + totalPrice.toFixed(2); // Include ₹
 
             // Apply color only to total quantity
-            totalQtyCell.className = totalQty < 2 ? 'low-quantity' : '';
+            totalQtyCell.className = totalQty < 10 ? 'low-quantity' : '';
         }
 
         // Initial call to set colors when the page loads

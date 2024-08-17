@@ -67,7 +67,7 @@
                     $total_qty += $total_qty_product;
                     $total_price += $total_price_product;
 
-                    $qty_class = $total_qty_product < 5 ? 'low-quantity' : '';
+                    $qty_class = $total_qty_product < 10 ? 'low-quantity' : '';
 
                     echo "<tr data-id='{$row['id']}'>
                             <td>{$sr_no}</td>
@@ -91,7 +91,7 @@
         <tfoot>
             <tr>
                 <th colspan="4">Total</th>
-                <th class="<?php echo $total_qty < 5 ? 'low-quantity' : ''; ?>"><?php echo $total_qty; ?></th>
+                <th class="<?php echo $total_qty < 10 ? 'low-quantity' : ''; ?>"><?php echo $total_qty; ?></th>
                 <th></th>
                 <th>₹<?php echo number_format($total_price, 2); ?></th>
                 <th></th>
@@ -109,7 +109,7 @@
                 const totalQtyCell = row.querySelector("td:nth-child(5)");
                 if (totalQtyCell) {
                     const totalQty = parseInt(totalQtyCell.textContent, 10);
-                    totalQtyCell.className = totalQty < 5 ? 'low-quantity' : '';
+                    totalQtyCell.className = totalQty < 10 ? 'low-quantity' : '';
                 }
             });
         }
@@ -213,7 +213,7 @@
             totalPriceCell.textContent = '₹' + totalPrice.toFixed(2); // Include ₹
 
             // Apply color only to total quantity
-            totalQtyCell.className = totalQty < 5 ? 'low-quantity' : '';
+            totalQtyCell.className = totalQty < 10 ? 'low-quantity' : '';
         }
 
         // Initial call to set colors when the page loads
